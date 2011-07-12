@@ -1,0 +1,122 @@
+NAME
+    URL::Encode - Encoding and decoding of
+    "application/x-www-form-urlencoded" encoding.
+
+SYNOPSIS
+        $octets = url_decode($octets);
+        $string = url_decode_utf8($octets);
+        $octets = url_encode($octets);
+        $octets = url_encode_utf8($string);
+                  url_params_each($octets, $callback [, $utf8 = false]);
+        $params = url_params_flat($octets [, $utf8 = false]);
+        $params = url_params_mixed($octets [, $utf8 = false]);
+        $params = url_params_multi($octets [, $utf8 = false]);
+
+DESCRIPTION
+    This module provides functions to encode and decode strings into and
+    from the "application/x-www-form-urlencoded" encoding.
+
+FUNCTIONS
+  url_decode
+    Decodes a urlencoded octet string.
+
+    *Usage*
+
+        $octets = url_decode($octets);
+
+  url_decode_utf8
+    Decodes a urlencoded octet string using the UTF-8 encoding scheme.
+
+    *Usage*
+
+        $string = url_decode_utf8($octets);
+
+  url_encode
+    Encodes an octet string into a urlencoded encoding.
+
+    *Usage*
+
+        $octets = url_encode($octets);
+
+  url_encode_utf8
+    Encodes a character string into a urlencoded encoding using the UTF-8
+    encoding scheme.
+
+    *Usage*
+
+        $octets = url_encode($string);
+
+  url_params_each
+    Decodes a urlencoded data set invoking a callback for each name/value
+    pair.
+
+    *Usage*
+
+        $callback = sub {
+            my ($name, $value) = @_;
+        };
+
+        url_params_each($octets, $callback);
+        url_params_each($octets, $callback, $utf8);
+
+  url_params_flat
+    Decodes a urlencoded data set into an "ARRAY" reference like:
+
+        [ "name", "value", "name", "value" ]
+
+    *Usage*
+
+        $array = url_params_flat($octets);
+        $array = url_params_flat($octets, $utf8);
+
+  url_params_mixed
+    Decodes a urlencoded data set into a "HASH" reference like:
+
+        { name => "value", name => [ "value", "value" ] }
+
+    *Usage*
+
+        $hash = url_params_mixed($octets);
+        $hash = url_params_mixed($octets, $utf8);
+
+  url_params_multi
+    Decodes a urlencoded data set into a "HASH" reference like:
+
+        { name => [ "value" ], name => [ "value", "value" ] }
+
+    *Usage*
+
+        $hash = url_params_multi($octets);
+        $hash = url_params_multi($octets, $utf8);
+
+EXPORTS
+    None by default. All functions can be exported using the ":all" tag or
+    individually.
+
+DIAGNOSTICS
+    (F) Usage: %s
+        Subroutine called with wrong number of arguments.
+
+    (F) Wide character in octet string
+    (F) Malformed UTF-8 in URL-decoded octets
+
+SEE ALSO
+    URL::Encode::XS
+        XS implementation of "URL::Encode".
+
+    CGI::Deurl::XS
+
+SUPPORT
+    Please report any bugs or feature requests to
+    "bug-url-encode@rt.cpan.org", or through the web interface at
+    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=URL-Encode>
+
+AUTHOR
+    Christian Hansen "chansen@cpan.org"
+
+COPYRIGHT
+    Copyright 2011 by Christian Hansen.
+
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
